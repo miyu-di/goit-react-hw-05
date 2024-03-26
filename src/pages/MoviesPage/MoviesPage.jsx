@@ -6,6 +6,8 @@ import MovieList from "../../components/MovieList/MovieList";
 
 export default function MoviesPage() {
   const [response, setResponse] = useState([]);
+  const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [params, setParams] = useSearchParams();
   const query = params.get("query") ?? "";
@@ -18,9 +20,13 @@ export default function MoviesPage() {
   useEffect(() => {
     async function getData() {
       try {
+        setIsLoading(false);
         const data = await getMovieByQuery(query);
         setResponse(data);
-      } catch (error) {}
+      } catch (error) {
+        setIsLoading(false);
+        setError(true)
+      }
     }
     getData();
   }, [query]);
@@ -38,7 +44,7 @@ export default function MoviesPage() {
         />
         <button className={css.btn}>Search</button>
       </form>
-      <MovieList movies={response} />
+      {error ? <p>Something went wrong!</p> : <MovieList movies={response} />}
     </>
   );
 }

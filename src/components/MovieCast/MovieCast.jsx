@@ -18,7 +18,9 @@ export default function MovieCast() {
   }, [movieId]);
 
   return (
-      <ul>
+    <div>
+      {response.length > 0 ? (
+        <ul>
         {response.map((cast) => (
           <li key={cast.id} className={css.info}>
             <div>
@@ -33,5 +35,7 @@ export default function MovieCast() {
           </li>
         ))}
       </ul>
+      ) : (<p>Unfortunately, we don't have any information about cast</p>)}
+    </div>
   );
 }

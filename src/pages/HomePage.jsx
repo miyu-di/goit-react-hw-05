@@ -4,20 +4,32 @@ import MovieList from "../components/MovieList/MovieList";
 
 export default function HomePage() {
   const [response, setResponse] = useState([]);
+  const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     async function getData() {
       try {
         const data = await getTrending();
         setResponse(data);
-      } catch {}
+        setIsLoading(false);
+      } catch {
+        setIsLoading(false);
+        setError(true);
+      }
     }
     getData();
   }, []);
   return (
     <div>
       <h1>Trending today</h1>
-      {<MovieList movies={response} />}
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>Something went wrong. Try again!</p>
+      ) : (
+        <MovieList movies={response} />
+      )}
     </div>
   );
 }
