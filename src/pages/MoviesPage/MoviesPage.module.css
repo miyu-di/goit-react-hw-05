@@ -1,0 +1,19 @@
+.input {
+  padding: 4px;
+  margin-right: 10px;
+  width: 200px;
+  border-radius: 2px;
+  border-color: #919191;
+}
+
+.btn {
+  padding: 5px 8px;
+  border: none;
+  background-color: #dcd8e6;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.btn:hover {
+  background-color: #c4c0cc;
+}
